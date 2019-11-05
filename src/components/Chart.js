@@ -39,7 +39,7 @@ class Chart extends Component {
               }
             },
             responsive: true,
-            responsiveAnimationDuration: 800,
+            responsiveAnimationDuration: 600,
           }}
         />
       </div>
