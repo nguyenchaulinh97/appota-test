@@ -3,12 +3,13 @@ import logo from './logo.svg';
 import './App.css';
 import Chart from './components/Chart';
 import axios from 'axios';
+import ReactLoading from 'react-loading';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      chartData: {},
+      chartData: null,
       data: [],
       totalData: [],
     }
@@ -77,11 +78,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        {this.state.chartData ? 
           <Chart
             chartData={this.state.chartData}
             name="NGUYEN CHAU LINH"
             legendPosition="bottom"
-          />
+          /> : <ReactLoading />
+        }
+        <ReactLoading />
       </div>
     );
   }
