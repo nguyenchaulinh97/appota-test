@@ -10,10 +10,7 @@ class App extends Component {
     this.state = {
       chartData: {},
       data: [],
-      time: [],
-      num_sta: [],
-      site: [],
-      wlan_bytes: [],
+      totalData: [],
     }
     this.getChartData = this.getChartData.bind(this)
   }
@@ -34,6 +31,7 @@ class App extends Component {
               time.push(new Date(e.time).toLocaleString())
               num_sta.push(e.num_sta)
               wlan_bytes.push(e.wlan_bytes)
+              site.push(e.site)
             });
           }
           else {
@@ -79,13 +77,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {Object.keys(this.state.chartData).length &&
           <Chart
             chartData={this.state.chartData}
             name="NGUYEN CHAU LINH"
-            legendPosition="bottom" 
-            />
-        }
+            legendPosition="bottom"
+          />
       </div>
     );
   }
