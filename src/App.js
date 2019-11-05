@@ -1,33 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Chart from './components/Chart';
+import MultiChart from './components/MultiChart'
+import Chart from './components/Chart'
 import axios from 'axios';
-import ReactLoading from 'react-loading';
+import PropTypes from 'prop-types';
+
+const site = [], num_sta = [], wlan_bytes = [], time = []
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      chartData: null,
-      data: [],
-      totalData: [],
+      chartData: {},
+      time: '',
+      num_sta: '',
+      wlan_bytes: '',
+      site: ''
     }
     this.getChartData = this.getChartData.bind(this)
   }
 
-  componentWillMount = () => {
+  componentWillMount() {
     this.getChartData();
   }
 
   getChartData() {
-    var site = [], num_sta = [], wlan_bytes = [], time = []
     axios.get('https://dev.cong.appwifi.com/stat/client')
       .then(res => {
         if (res.status == '200') {
           if (res.data.message == 'success') {
             const data = res.data.data
-            // this.setState({data: res.data.data})
             data.forEach(e => {
               time.push(new Date(e.time).toLocaleString())
               num_sta.push(e.num_sta)
@@ -35,14 +37,9 @@ class App extends Component {
               site.push(e.site)
             });
           }
-          else {
-
-          }
-
+          else { }
         }
-        else {
-
-        }
+        else { }
       }).catch(function (error) {
         console.log(error);
       });
@@ -72,23 +69,24 @@ class App extends Component {
           }
         ]
       }
-    });
+    })
   }
 
   render() {
+    // const { classes } = this.props;
     return (
       <div className="App">
-        {this.state.chartData ? 
-          <Chart
-            chartData={this.state.chartData}
-            name="NGUYEN CHAU LINH"
-            legendPosition="bottom"
-          /> : <ReactLoading />
-        }
-        <ReactLoading />
+        <Chart
+          chartData={this.state.chartData}
+          legendPosition='bottom'
+        />
       </div>
     );
   }
 }
+
+App.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
 export default App;
