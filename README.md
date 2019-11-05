@@ -1,6 +1,6 @@
-# ReachCharts App
+# APPOTA TEST
 
-Example app showing you how to use react-chartjs-2 in a project
+By Nguyen Chau Linh
 
 ## Install Dependencies
 ```bash
